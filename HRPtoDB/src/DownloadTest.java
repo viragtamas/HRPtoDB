@@ -6,6 +6,11 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Element;
 import org.w3c.dom.Document;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
 
 public class DownloadTest {
 
@@ -69,18 +74,28 @@ public class DownloadTest {
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			DOMSource source = new DOMSource(doc);
 			
+			//Transforming request
 			System.out.println("Request: ");
 			StreamResult result = new StreamResult(System.out);
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(source, result);
 			
+			//Creating HTTP Client
+			String strURL = "http://dev.hrp.hu/CompanyGroup.XmlGateway/CatalogueService/GetCatalogueItem/";
+			CloseableHttpClient httpclient = HttpClients.createDefault();
+			HttpPost post = new HttpPost(strURL);
+			
+			//Post XML to URL
+			
+			
+			//Get Response
+			
+			
 		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
-		
-
 	}
 
 }
