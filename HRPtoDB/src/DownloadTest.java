@@ -1,4 +1,3 @@
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -13,7 +12,7 @@ public class DownloadTest {
 	public static void main(String[] args) {
 		try{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docbuilder = docfactory.newDocumentBuilder();
+			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
 			/* Sample XML
 			 * <Envelope>
@@ -31,7 +30,6 @@ public class DownloadTest {
 			 */
 			
 			//Envelope
-			Document doc = docbuilder.newDocument();
 			Element envelope = doc.createElement("Envelope");
 			doc.appendChild(envelope);
 			
@@ -68,15 +66,14 @@ public class DownloadTest {
 			request.appendChild(productid);
 			
 			//Print result
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			DOMSource source = new DOMSource(doc);
 			
 			System.out.println("Request: ");
 			StreamResult result = new StreamResult(System.out);
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.transform(source, result);		
+			transformer.transform(source, result);
 			
 		}
 		catch (Exception e){
