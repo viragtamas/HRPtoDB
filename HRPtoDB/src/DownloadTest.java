@@ -1,3 +1,5 @@
+import java.io.StringWriter;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -6,11 +8,17 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Element;
 import org.w3c.dom.Document;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.util.EntityUtils;
 
 public class DownloadTest {
 
@@ -76,22 +84,28 @@ public class DownloadTest {
 			
 			//Transforming request
 			System.out.println("Request: ");
-			StreamResult result = new StreamResult(System.out);
+			StringWriter sw = new StringWriter();
+			//StreamResult result = new StreamResult(System.out);
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.transform(source, result);
+			transformer.transform(source, new StreamResult(sw));
+			System.out.println(sw.toString());
 			
 			//Creating HTTP Client
 			String strURL = "http://dev.hrp.hu/CompanyGroup.XmlGateway/CatalogueService/GetCatalogueItem/";
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 			HttpPost post = new HttpPost(strURL);
+			post.setEntity(new StringEntity(sw.toString()));
 			
 			//Post XML to URL
-			
-			
-			//Get Response
-			
-			
+			HttpResponse response = httpclient.execute(post);
+		    System.out.println("\nSending 'POST' request to URL : " + strURL);
+		    System.out.println("Post parameters : " + post.getEntity());
+		    
+		    //Get Response
+		    System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
+
+		
 		}
 		catch (Exception e){
 			e.printStackTrace();
