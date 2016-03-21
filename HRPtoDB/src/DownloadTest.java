@@ -36,14 +36,9 @@ public class DownloadTest {
 		        result.append(line);
 		        System.out.println(line.toString());
 		    }
-
-		    
-		    
-		    
 		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
 	}
-
 }

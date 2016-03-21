@@ -85,8 +85,12 @@ public class HrpXml {
 			doc.appendChild(envelope);
 			
 			//Body
+			Element body = doc.createElement("Body");
+			envelope.appendChild(body);
 			
 			//Request
+			Element request = doc.createElement("Request");
+			body.appendChild(request);
 			
 			//Base
 			
