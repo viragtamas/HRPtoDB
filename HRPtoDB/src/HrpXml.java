@@ -18,45 +18,109 @@ public class HrpXml {
 		this.AuthCode = AuthCode;
 	}
 	
-	public String GetCatalogueList(){
+	public String GetCatalogueList(String Language, String Currency, boolean DiscountFilter, 
+			boolean Secondhandfilter, String[] Categories, String[] Manufacturers, 
+			boolean Newfilter, boolean Stockfilter, String Textfilter, int Sequence){
 		StringWriter sw = new StringWriter();
 		try{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
 			/* Sample XML
-			 * <Envelope>
-         	 *	 <Body>
-           	 *		<Request>
-             *			<Base>
-			 *             <AuthCode>##########</AuthCode>
-			 *             <Language>hu</Language>
-			 *             <Currency>HUF</Currency>
-			 *           </Base>
-			 *           <!--DiscountFilter: Szûrés akciós termékre-->
-			 *           <DiscountFilter>false</DiscountFilter>
-			 *           <!--SecondhandFilter: Szûrés használt termékre-->
-			 *           <SecondhandFilter>false</SecondhandFilter>
-			 *           <Category1IdList>
-			 *	           <Category1Id>B011</Category1Id>
-			 *           </Category1IdList>
-			 *           <ManufacturerIdList>
-			 *              <ManufacturerId>A132</ManufacturerId>
-			 *           </ManufacturerIdList>
-			 *           <!--NewFilter: Újdonság-->
-			 *           <NewFilter>false</NewFilter>
-			 *           <!--StockFilter: Készleten-->
-			 *           <StockFilter>false</StockFilter>
-			 *           <!--TextFilter: Keresés terméknévre vagy cikkszámra-->
-			 *           <TextFilter></TextFilter>
-			 *           <CurrentPageIndex>1</CurrentPageIndex>
-			 *           <ItemsOnPage>30</ItemsOnPage>
-			 *            <!--6:ár növekvõ, 7:ár csökkenõ, 2:cikkszám növekvõ, 3:cikkszám csökkenõ, 4:név növekvõ, 5:név csökkenõ, 8:készlet növekvõ, 9:készlet csökkenõ, 12:garancia növekvõ, 13:garancia csökkenõ-->
-			 *           <Sequence>6</Sequence>
-			 *		</Request>
-         	 *	 </Body>
-       		 * </Envelope>
+			   <Envelope>
+				  <Body>
+				    <Request>
+				      <Base>
+				        <AuthCode>________-____-____-____-____________</AuthCode>
+				        <Language>hu</Language>
+				        <Currency>HUF</Currency>
+				      </Base>
+				      <!--DiscountFilter: Szûrés akciós termékre-->
+				      <DiscountFilter>false</DiscountFilter>
+				      <!--SecondhandFilter: Szûrés használt termékre-->
+				      <SecondhandFilter>false</SecondhandFilter>
+				      <!--NewFilter: Szûrés újdonságokra-->
+				      <NewFilter>false</NewFilter>
+				      <!--StockFilter: Szûrés készleten lévõ termékekre-->
+				      <StockFilter>false</StockFilter>
+				      <!--ManufacturerIdList: Gyártók azonosítói-->
+				      <ManufacturerIdList>
+				        <ManufacturerId></ManufacturerId>
+				      </ManufacturerIdList>
+				      <!--Category1IdList: Elsõdleges termékjellemzõk azonosítói-->
+				      <Category1IdList>
+				        <Category1Id></Category1Id>
+				      </Category1IdList>
+				      <!--Category2IdList: Másodlagos termékjellemzõk azonosítói-->
+				      <Category2IdList>
+				        <Category2Id></Category2Id>
+				      </Category2IdList>
+				      <!--Category3IdList: Harmadlagos termékjellemzõk azonosítói-->
+				      <Category3IdList>
+				        <Category3Id></Category3Id>
+				      </Category3IdList>
+				      <!--TextFilter: Keresés terméknévre vagy cikkszámra-->
+				      <TextFilter></TextFilter>
+				      <!--CurrentPageIndex: Aktuális oldalszám-->
+				      <CurrentPageIndex>1</CurrentPageIndex>
+				      <!--ItemsOnPage: Egy oldalon megjeleníthetõ termékek száma-->
+				      <ItemsOnPage>10</ItemsOnPage>
+				      <!--Sequence: Sorrend (0:alapértelmezett, 6:ár növekvõ, 7:ár csökkenõ, 2:cikkszám növekvõ, 3:cikkszám csökkenõ, 4:név növekvõ, 5:név csökkenõ, 8:készlet növekvõ, 9:készlet csökkenõ, 12:garancia növekvõ, 13:garancia csökkenõ)-->
+				      <Sequence>0</Sequence>
+				      <!--PtaProductDetails: Szûrés termék technikai jellemzõkre-->
+				      <PtaProductDetails>
+				        <PtaProductDetail>
+				          <TulajdonsagListaId></TulajdonsagListaId>
+				          <TulajdonsagId></TulajdonsagId>
+				          <TulajdonsagTipus></TulajdonsagTipus>
+				          <ProdValueFrom></ProdValueFrom>
+				          <ProdValueTo></ProdValueTo>
+				        </PtaProductDetail>
+				      </PtaProductDetails>
+				    </Request>
+				  </Body>
+				</Envelope>
 			 */
+			
+			//Envelope
+			Element envelope = doc.createElement("Envelope");
+			doc.appendChild(envelope);
+			
+			//Body
+			
+			//Request
+			
+			//Base
+			
+			//AuthCode
+			
+			//Language
+			
+			//Currency
+			
+			//DiscountFilter
+			
+			//SecondhandFilter
+			
+			//Category1IdList
+			
+			//Category1Id - array
+			
+			//ManufacturerIdList
+			
+			//ManufacturerId - array
+			
+			//NewFilter
+			
+			//StockFilter
+			
+			//TextFilter
+			
+			//CurrentPageIndex
+			
+			//ItemsOnPage
+			
+			//Sequence
 			
 		}catch (Exception e){
 			e.printStackTrace();
