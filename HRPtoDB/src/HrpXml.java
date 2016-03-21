@@ -18,11 +18,54 @@ public class HrpXml {
 		this.AuthCode = AuthCode;
 	}
 	
-	public String GetCatalogueList(String url){
+	public String GetCatalogueList(){
+		StringWriter sw = new StringWriter();
+		try{
+			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
+			Document doc = docfactory.newDocumentBuilder().newDocument();
+			
+			/* Sample XML
+			 * <Envelope>
+         	 *	 <Body>
+           	 *		<Request>
+             *			<Base>
+			 *             <AuthCode>##########</AuthCode>
+			 *             <Language>hu</Language>
+			 *             <Currency>HUF</Currency>
+			 *           </Base>
+			 *           <!--DiscountFilter: Szûrés akciós termékre-->
+			 *           <DiscountFilter>false</DiscountFilter>
+			 *           <!--SecondhandFilter: Szûrés használt termékre-->
+			 *           <SecondhandFilter>false</SecondhandFilter>
+			 *           <Category1IdList>
+			 *	           <Category1Id>B011</Category1Id>
+			 *           </Category1IdList>
+			 *           <ManufacturerIdList>
+			 *              <ManufacturerId>A132</ManufacturerId>
+			 *           </ManufacturerIdList>
+			 *           <!--NewFilter: Újdonság-->
+			 *           <NewFilter>false</NewFilter>
+			 *           <!--StockFilter: Készleten-->
+			 *           <StockFilter>false</StockFilter>
+			 *           <!--TextFilter: Keresés terméknévre vagy cikkszámra-->
+			 *           <TextFilter></TextFilter>
+			 *           <CurrentPageIndex>1</CurrentPageIndex>
+			 *           <ItemsOnPage>30</ItemsOnPage>
+			 *            <!--6:ár növekvõ, 7:ár csökkenõ, 2:cikkszám növekvõ, 3:cikkszám csökkenõ, 4:név növekvõ, 5:név csökkenõ, 8:készlet növekvõ, 9:készlet csökkenõ, 12:garancia növekvõ, 13:garancia csökkenõ-->
+			 *           <Sequence>6</Sequence>
+			 *		</Request>
+         	 *	 </Body>
+       		 * </Envelope>
+			 */
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
 		return Query;
 	}
 		
-	public String GetCatalogueItem(){
+	public String GetCatalogueItem(String Language, String Currency){
 		StringWriter sw = new StringWriter();
 		try{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
@@ -61,17 +104,17 @@ public class HrpXml {
 			
 			//AuthCode
 			Element authcode = doc.createElement("AuthCode");
-			authcode.setTextContent("test");
+			authcode.setTextContent(AuthCode);
 			base.appendChild(authcode);
 			
 			//Language
 			Element language = doc.createElement("Language");
-			language.setTextContent("hu");
+			language.setTextContent(Language);
 			base.appendChild(language);
 			
 			//Currency
 			Element currency = doc.createElement("Currency");
-			currency.setTextContent("HUF");
+			currency.setTextContent(Currency);
 			base.appendChild(currency);
 			
 			//ProductID
