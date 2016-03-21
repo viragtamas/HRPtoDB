@@ -1,5 +1,6 @@
 import java.io.StringWriter;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -18,11 +19,8 @@ public class HrpXml {
 		this.AuthCode = AuthCode;
 	}
 	
-	public String GetCatalogueList(String Language, String Currency, boolean DiscountFilter, 
-			boolean Secondhandfilter, String[] Categories, String[] Manufacturers, 
-			boolean Newfilter, boolean Stockfilter, String Textfilter, int Sequence){
-		StringWriter sw = new StringWriter();
-		try{
+	//A paraméterlista nem teljes, át kell nézni.
+	public Document GetCatalogueList() throws Exception{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
@@ -122,19 +120,13 @@ public class HrpXml {
 			
 			//Sequence
 			
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		
-		return Query;
+		return doc;
 	}
 		
-	public String GetCatalogueItem(String Language, String Currency){
-		StringWriter sw = new StringWriter();
-		try{
-			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
-			Document doc = docfactory.newDocumentBuilder().newDocument();
-			
+	public Document GetCatalogueItem(String Language, String Currency) throws Exception{
+		DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
+		Document doc = docfactory.newDocumentBuilder().newDocument();			
+	
 			/* Sample XML
 			 * <Envelope>
          	 *	 <Body>
@@ -185,22 +177,8 @@ public class HrpXml {
 			Element productid = doc.createElement("ProductId");
 			productid.setTextContent("123");
 			request.appendChild(productid);
-			
-			//Print result
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
-			DOMSource source = new DOMSource(doc);
-			
-			//Transforming request
-			System.out.println("Request: ");
-			
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			transformer.setOutputProperty(OutputKeys.INDENT, "no");
-			transformer.transform(source, new StreamResult(sw));
-			System.out.println(sw.toString());
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return sw.toString();
+		
+			return doc;
 	}
 	
 	public String GetStructurePta(){
@@ -229,6 +207,26 @@ public class HrpXml {
 	
 	public String CreateOrder(){
 		return Query;
+	}
+	
+	public String TransformDocument(Document doc){
+		StringWriter sw = new StringWriter();
+		try{
+		//Print result
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		DOMSource source = new DOMSource(doc);
+		
+		//Transforming request
+		System.out.println("Request: ");
+		
+		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+		transformer.setOutputProperty(OutputKeys.INDENT, "no");
+		transformer.transform(source, new StreamResult(sw));
+		System.out.println(sw.toString());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return sw.toString();
 	}
 	
 }

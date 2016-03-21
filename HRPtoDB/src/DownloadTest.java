@@ -17,7 +17,7 @@ public class DownloadTest {
 			String strURL = "http://dev.hrp.hu/CompanyGroup.XmlGateway/CatalogueService/GetCatalogueItem/";
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 			HttpPost post = new HttpPost(strURL);
-			post.setEntity(new StringEntity(XmlObject.GetCatalogueItem("hu", "HUF")));
+			post.setEntity(new StringEntity(XmlObject.TransformDocument(XmlObject.GetCatalogueItem("hu", "HUF"))));
 			
 			//Post XML to URL
 			HttpResponse response = httpclient.execute(post);
