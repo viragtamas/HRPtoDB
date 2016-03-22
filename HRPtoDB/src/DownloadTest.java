@@ -11,7 +11,7 @@ public class DownloadTest {
 	public static void main(String[] args) {
 		try{
 			//Creating new Object to handle XML Creation
-			HrpXml XmlObject = new HrpXml("{123456}");
+			HrpXml XmlObject = new HrpXml("B35B2464-9678-41CE-BA7F-792133AD5211");
 						
 			//Creating HTTP Client
 			String strURL = "http://dev.hrp.hu/CompanyGroup.XmlGateway/CatalogueService/GetCatalogueItem/";

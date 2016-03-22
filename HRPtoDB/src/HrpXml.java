@@ -19,7 +19,10 @@ public class HrpXml {
 	}
 	
 	//A paraméterlista nem teljes, át kell nézni.
-	public Document GetCatalogueList(String Language) throws Exception{
+	public Document GetCatalogueList(String Language,
+									 String Currency,
+									 boolean DiscountFilter,
+									 boolean SecondHandFilter) throws Exception{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
@@ -106,10 +109,19 @@ public class HrpXml {
 			base.appendChild(language);
 			
 			//Currency
+			Element currency = doc.createElement("Currency");
+			currency.setTextContent(Currency);
+			base.appendChild(currency);
 			
 			//DiscountFilter
+			Element discountfilter = doc.createElement("DiscountFilter");
+			discountfilter.setTextContent(DiscountFilter ? "true" : "false");
+			request.appendChild(discountfilter);
 			
 			//SecondhandFilter
+			Element secondhandfilter = doc.createElement("SecondhandFilter");
+			secondhandfilter.setTextContent(SecondHandFilter ? "true" : "false");
+			request.appendChild(secondhandfilter);
 			
 			//Category1IdList
 			
