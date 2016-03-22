@@ -1,6 +1,5 @@
 import java.io.StringWriter;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -20,7 +19,7 @@ public class HrpXml {
 	}
 	
 	//A paraméterlista nem teljes, át kell nézni.
-	public Document GetCatalogueList() throws Exception{
+	public Document GetCatalogueList(String Language) throws Exception{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
@@ -93,10 +92,18 @@ public class HrpXml {
 			body.appendChild(request);
 			
 			//Base
+			Element base = doc.createElement("Base");
+			request.appendChild(base);
 			
 			//AuthCode
+			Element authcode = doc.createElement("AuthCode");
+			authcode.setTextContent(AuthCode);
+			base.appendChild(authcode);
 			
 			//Language
+			Element language = doc.createElement("Language");
+			language.setTextContent(Language);
+			base.appendChild(language);
 			
 			//Currency
 			
@@ -224,7 +231,7 @@ public class HrpXml {
 		System.out.println("Request: ");
 		
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-		transformer.setOutputProperty(OutputKeys.INDENT, "no");
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		transformer.transform(source, new StreamResult(sw));
 		System.out.println(sw.toString());
 		}catch(Exception e){
