@@ -164,7 +164,7 @@ public class HrpXml {
 		return doc;
 	}
 		
-	public Document GetCatalogueItem(String Language, String Currency) throws Exception{
+	public Document GetCatalogueItem(String Language, String Currency, String ProductId) throws Exception{
 		DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 		Document doc = docfactory.newDocumentBuilder().newDocument();			
 	
@@ -216,7 +216,7 @@ public class HrpXml {
 			
 			//ProductID
 			Element productid = doc.createElement("ProductId");
-			productid.setTextContent("123");
+			productid.setTextContent(ProductId);
 			request.appendChild(productid);
 		
 			return doc;
