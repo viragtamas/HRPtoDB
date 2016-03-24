@@ -22,7 +22,9 @@ public class HrpXml {
 	public Document GetCatalogueList(String Language,
 									 String Currency,
 									 boolean DiscountFilter,
-									 boolean SecondHandFilter) throws Exception{
+									 boolean SecondHandFilter,
+									 boolean NewFilter,
+									 boolean StockFilter) throws Exception{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
@@ -123,6 +125,16 @@ public class HrpXml {
 			secondhandfilter.setTextContent(SecondHandFilter ? "true" : "false");
 			request.appendChild(secondhandfilter);
 			
+			//NewFilter
+			Element newfilter = doc.createElement("NewFilter");
+			newfilter.setTextContent(NewFilter ? "true" : "false");
+			request.appendChild(newfilter);
+			
+			//StockFilter
+			Element stockfilter = doc.createElement("StockFilter");
+			stockfilter.setTextContent(StockFilter?"true":"false");
+			request.appendChild(stockfilter);
+			
 			//Category1IdList
 			
 			//Category1Id - array
@@ -131,9 +143,6 @@ public class HrpXml {
 			
 			//ManufacturerId - array
 			
-			//NewFilter
-			
-			//StockFilter
 			
 			//TextFilter
 			
