@@ -24,7 +24,8 @@ public class HrpXml {
 									 boolean DiscountFilter,
 									 boolean SecondHandFilter,
 									 boolean NewFilter,
-									 boolean StockFilter) throws Exception{
+									 boolean StockFilter,
+									 String[] ManufacturerIdList) throws Exception{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
@@ -135,14 +136,22 @@ public class HrpXml {
 			stockfilter.setTextContent(StockFilter?"true":"false");
 			request.appendChild(stockfilter);
 			
+			//ManufacturerIdList
+			if(ManufacturerIdList!=null){
+				Element manufactureridlist = doc.createElement("ManufacturerIdList");
+				request.appendChild(manufactureridlist);
+				
+				//Element list
+				for (String id : ManufacturerIdList){
+					Element manufacturerid = doc.createElement("ManufacturerId");
+					manufacturerid.setTextContent(id);
+					manufactureridlist.appendChild(manufacturerid);
+				}
+			}
+			
 			//Category1IdList
 			
 			//Category1Id - array
-			
-			//ManufacturerIdList
-			
-			//ManufacturerId - array
-			
 			
 			//TextFilter
 			
