@@ -7,7 +7,7 @@ public class XmlTester {
 		String[] Cat1IdList = new String[] {"A", "B"};
 		String[] Cat2IdList = new String[] {"A", "B"};
 		String[] Cat3IdList = new String[] {"A", "B"};
-		XmlObject.TransformDocument(XmlObject.GetCatalogueList("hu", "HUF", true, true, true, true, ManIDList, Cat1IdList, Cat2IdList, Cat3IdList));
+		XmlObject.TransformDocument(XmlObject.GetCatalogueList("hu", "HUF", true, true, true, true, ManIDList, Cat1IdList, Cat2IdList, Cat3IdList, "Dell"));
 	}
 
 }

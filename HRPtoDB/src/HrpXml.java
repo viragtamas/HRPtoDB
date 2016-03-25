@@ -28,7 +28,8 @@ public class HrpXml {
 									 String[] ManufacturerIdList,
 									 String[] Category1IdList,
 									 String[] Category2IdList,
-									 String[] Category3IdList) throws Exception{
+									 String[] Category3IdList,
+									 String TextFilter) throws Exception{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
@@ -192,6 +193,9 @@ public class HrpXml {
 			}
 			
 			//TextFilter
+			Element textfilter = doc.createElement("TextFilter");
+			textfilter.setTextContent(TextFilter);
+			request.appendChild(textfilter);
 			
 			//CurrentPageIndex
 			
