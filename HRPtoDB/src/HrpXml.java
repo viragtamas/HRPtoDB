@@ -31,7 +31,8 @@ public class HrpXml {
 									 String[] Category3IdList,
 									 String TextFilter,
 									 int CurrentPage,
-									 int ItemsOnPage) throws Exception{
+									 int ItemsOnPage,
+									 int Sequence) throws Exception{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
@@ -210,6 +211,9 @@ public class HrpXml {
 			request.appendChild(itemsonpage);
 			
 			//Sequence
+			Element sequence = doc.createElement("Sequence");
+			sequence.setTextContent(""+Sequence);
+			request.appendChild(sequence);
 			
 		return doc;
 	}

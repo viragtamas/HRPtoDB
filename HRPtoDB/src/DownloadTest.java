@@ -24,10 +24,11 @@ public class DownloadTest {
 			HrpXml XmlObject = new HrpXml("B35B2464-9678-41CE-BA7F-792133AD5211");
 						
 			//Creating HTTP Client
-			String strURL = "http://dev.hrp.hu/CompanyGroup.XmlGateway/CatalogueService/GetCatalogueItem/";
+			String strURL = "http://dev.hrp.hu/CompanyGroup.XmlGateway/CatalogueService/GetCatalogueList/";
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 			HttpPost post = new HttpPost(strURL);
-			post.setEntity(new StringEntity(XmlObject.TransformDocument(XmlObject.GetCatalogueItem("hu", "HUF", "M2800-6"))));
+			//post.setEntity(new StringEntity(XmlObject.TransformDocument(XmlObject.GetCatalogueItem("hu", "HUF", "M2800-6"))));
+			post.setEntity(new StringEntity(XmlObject.TransformDocument(XmlObject.GetCatalogueList("hu", "HUF", false, false, false, true, null, null, null, null, "", 1, 1701, 7))));
 			
 			//Post XML to URL
 			HttpResponse response = httpclient.execute(post);
