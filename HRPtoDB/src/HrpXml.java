@@ -25,7 +25,10 @@ public class HrpXml {
 									 boolean SecondHandFilter,
 									 boolean NewFilter,
 									 boolean StockFilter,
-									 String[] ManufacturerIdList) throws Exception{
+									 String[] ManufacturerIdList,
+									 String[] Category1IdList,
+									 String[] Category2IdList,
+									 String[] Category3IdList) throws Exception{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
@@ -150,8 +153,43 @@ public class HrpXml {
 			}
 			
 			//Category1IdList
+			if(Category1IdList!=null){
+				Element category1idlist = doc.createElement("Category1IdList");
+				request.appendChild(category1idlist);
+				
+				//Element list
+				for (String id : Category1IdList){
+					Element category1id = doc.createElement("Category1Id");
+					category1id.setTextContent(id);
+					category1idlist.appendChild(category1id);
+				}
+			}
 			
-			//Category1Id - array
+			//Category2IdList
+			if(Category2IdList!=null){
+				Element category2idlist = doc.createElement("Category2IdList");
+				request.appendChild(category2idlist);
+				
+				//Element list
+				for (String id : Category2IdList){
+					Element category2id = doc.createElement("Category2Id");
+					category2id.setTextContent(id);
+					category2idlist.appendChild(category2id);
+				}
+			}
+			
+			//Category1IdList
+			if(Category3IdList!=null){
+				Element category3idlist = doc.createElement("Category3IdList");
+				request.appendChild(category3idlist);
+				
+				//Element list
+				for (String id : Category3IdList){
+					Element category3id = doc.createElement("Category3Id");
+					category3id.setTextContent(id);
+					category3idlist.appendChild(category3id);
+				}
+			}
 			
 			//TextFilter
 			
