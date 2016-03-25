@@ -29,7 +29,9 @@ public class HrpXml {
 									 String[] Category1IdList,
 									 String[] Category2IdList,
 									 String[] Category3IdList,
-									 String TextFilter) throws Exception{
+									 String TextFilter,
+									 int CurrentPage,
+									 int ItemsOnPage) throws Exception{
 			DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
 			Document doc = docfactory.newDocumentBuilder().newDocument();
 			
@@ -198,8 +200,14 @@ public class HrpXml {
 			request.appendChild(textfilter);
 			
 			//CurrentPageIndex
+			Element currentpage = doc.createElement("CurrentPageIndex");
+			currentpage.setTextContent(""+CurrentPage);
+			request.appendChild(currentpage);
 			
 			//ItemsOnPage
+			Element itemsonpage = doc.createElement("ItemsOnPage");
+			itemsonpage.setTextContent(""+ItemsOnPage);
+			request.appendChild(itemsonpage);
 			
 			//Sequence
 			
