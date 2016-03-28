@@ -1,5 +1,7 @@
+import java.io.File;
 import java.io.StringWriter;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -7,12 +9,14 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Element;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 
 public class HrpXml {
 	
 	//AuthCode az azonosításhoz
 	public String AuthCode;
-	public String Query;
+	public String Query = "";
 	
 	public HrpXml(String AuthCode){
 		this.AuthCode = AuthCode;
@@ -216,6 +220,25 @@ public class HrpXml {
 			request.appendChild(sequence);
 			
 		return doc;
+	}
+	
+	public String ParseCatalogueItems(String filename) throws Exception{
+		
+		File fXmlFile = new File(filename);
+		DocumentBuilderFactory docfactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = docfactory.newDocumentBuilder();
+		Document doc = dBuilder.parse(fXmlFile);
+		
+		//Node length = doc.getElementById("ListCount");
+		NodeList nList = doc.getElementsByTagName("CatalogueItem");
+		
+		for (int i=0; i<nList.getLength(); i++){
+			Node nNode = nList.item(i);
+			Element eElement = (Element) nNode;
+			Query = Query+eElement.getElementsByTagName("ProductId").item(0).getTextContent()+"; ";
+		}
+		
+		return Query;
 	}
 		
 	public Document GetCatalogueItem(String Language, String Currency, String ProductId) throws Exception{

@@ -28,7 +28,7 @@ public class DownloadTest {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 			HttpPost post = new HttpPost(strURL);
 			//post.setEntity(new StringEntity(XmlObject.TransformDocument(XmlObject.GetCatalogueItem("hu", "HUF", "M2800-6"))));
-			post.setEntity(new StringEntity(XmlObject.TransformDocument(XmlObject.GetCatalogueList("hu", "HUF", false, false, false, true, null, null, null, null, "", 1, 1701, 7))));
+			post.setEntity(new StringEntity(XmlObject.TransformDocument(XmlObject.GetCatalogueList("hu", "HUF", false, false, false, true, null, null, null, null, "", 1, 10, 7))));
 			
 			//Post XML to URL
 			HttpResponse response = httpclient.execute(post);
@@ -44,10 +44,14 @@ public class DownloadTest {
 		    PrintWriter file = new PrintWriter("test"+df.format(today).toString()+".xml");
 		    String line = "";
 		    while ((line = rd.readLine()) != null) {
-		        file.println(line.toString());
+		    	file.println(line.toString());
 		    }
+		    	    
 		    file.close();
 		    System.out.println("Created: test"+df.format(today).toString()+".xml");
+		    
+		    System.out.println(XmlObject.ParseCatalogueItems("test"+df.format(today).toString()+".xml"));
+		    
 		}
 		catch (Exception e){
 			e.printStackTrace();
